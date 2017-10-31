@@ -25,14 +25,6 @@ public class DoctorActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -82,19 +74,19 @@ public class DoctorActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_graph) {
-            DoctorGraphicFragment blankFragment = new DoctorGraphicFragment();
-            FragmentManager manager = getSupportFragmentManager();
-            manager.beginTransaction().replace(R.id.doctorLayout, blankFragment).commit();
-        } else if (id == R.id.nav_profile) {
+        if (id == R.id.nav_doctor_profile) {
+            DoctorGraphicFragment doctorGraphicFragment = new DoctorGraphicFragment();
+            FragmentManager doctorManager = getSupportFragmentManager();
+            doctorManager.beginTransaction()
+                    .replace(R.id.doctor_mainLayout, doctorGraphicFragment, doctorGraphicFragment.getTag()).commit();
 
-        } else if (id == R.id.nav_qrcode) {
+        } else if (id == R.id.nav_doctor_qrScanner) {
 
-        } else if (id == R.id.nav_emergency) {
+        } else if (id == R.id.nav_doctor_appointment) {
 
-        } else if (id == R.id.nav_settings) {
+        } else if (id == R.id.nav_doctor_setting) {
 
-        } else if (id == R.id.nav_logout) {
+        } else if (id == R.id.nav_doctor_logOut) {
 
         }
 

@@ -30,13 +30,13 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
     private void checkLogin(){
-        if (userName.getText().toString().equals("admin") && password.getText().toString().equals("1234")) {
-            Toast.makeText(this, "Login Success", Toast.LENGTH_SHORT).show();
-            final Intent i = new Intent(this, PatientActivity.class);
+        if (userName.getText().toString().equals("doktor") && password.getText().toString().equals("1234")) {
+
+            final Intent i = new Intent(this, DoctorActivity.class);
             Thread timer = new Thread(){
                 public void run(){
                     try{
-                        sleep(1000);
+                        sleep(0);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -49,8 +49,26 @@ public class LoginActivity extends AppCompatActivity {
             };
 
             timer.start();
-        } else {
-            Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show();
+        }
+        if(userName.getText().toString().equals("patient") && password.getText().toString().equals("1234")){
+
+            final Intent i = new Intent(this, PatientActivity.class);
+            Thread timer = new Thread(){
+                public void run(){
+                    try{
+                        sleep(0);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    finally{
+                        startActivity(i);
+                        finish();
+
+                    }
+                }
+            };
+
+            timer.start();
         }
     }
 }
