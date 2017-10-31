@@ -16,10 +16,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity"
-            android:exported="true">
-
-        </activity>
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".PatientActivity"
+            android:label="@string/title_activity_patient"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

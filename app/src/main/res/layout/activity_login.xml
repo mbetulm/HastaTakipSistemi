@@ -29,6 +29,7 @@
                 android:src="@drawable/ic_directions_bike_black_24dp"
                 />
             <EditText
+                android:id="@+id/txt_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
@@ -48,6 +49,7 @@
                 android:background="#f9d7db"
                 />
             <EditText
+                android:id="@+id/txt_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
@@ -77,6 +79,7 @@
                 android:padding="8dp"
                 />
             <Button
+                android:id="@+id/btn_Login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_login"
