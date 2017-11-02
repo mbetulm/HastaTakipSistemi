@@ -12,7 +12,7 @@
             android:title="QR Scanner" />
         <item
             android:id="@+id/nav_doctor_appointment"
-            android:icon="@drawable/appoinment"
+            android:icon="@drawable/appointment"
             android:title="My Appoinment" />
 
     </group>
