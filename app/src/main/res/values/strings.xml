@@ -14,4 +14,17 @@
     <string name="title_activity_doctor_qr">DoctorQrActivity</string>
     <string name="title_activity_doctor_appointments">DoctorAppointmentsActivity</string>
     <string name="title_activity_doctor_settings">DoctorSettingsActivity</string>
+    <string name="title_activity_doctor_add_patient">DoctorAddPatientActivity</string>
+    <string name="title_activity_doctor_my_patients">DoctorMyPatientsActivity</string>
+    <string name="title_activity_doctor_emergency_notes">DoctorEmergencyNotesActivity</string>
+    <string name="title_activity_patient_disease">PatientDiseaseActivity</string>
+    <string name="title_activity_patient_pill">PatientPillActivity</string>
+    <string name="title_activity_patient_allergy">PatientAllergyActivity</string>
+    <string name="title_activity_patient_appointment">PatientAppointmentActivity</string>
+    <string name="title_activity_patient_assay">PatientAssayActivity</string>
+    <string name="title_activity_patient_emergency_note">PatientEmergencyNoteActivity</string>
+    <string name="title_activity_patient_graphic">PatientGraphicActivity</string>
+    <string name="title_activity_patient_qr">PatientQRActivity</string>
+    <string name="title_activity_patient_emergncy">PatientEmergncyActivity</string>
+    <string name="title_activity_patient_setting">PatientSettingActivity</string>
 </resources>

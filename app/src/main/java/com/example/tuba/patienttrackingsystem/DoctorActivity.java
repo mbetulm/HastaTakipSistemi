@@ -26,7 +26,9 @@ public class DoctorActivity extends AppCompatActivity
 
     Button editProfile;
     CardView appButton;
-    
+    CardView addpatientButton;
+    CardView mypatientsButton;
+    CardView emergencynoteButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +49,9 @@ public class DoctorActivity extends AppCompatActivity
 
         editProfile= (Button) findViewById(R.id.bUploadImage);
         appButton = (CardView) findViewById(R.id.appointmentButton);
-
+        addpatientButton = (CardView) findViewById(R.id.addPatientButton);
+        mypatientsButton = (CardView) findViewById(R.id.mypatientsButton);
+        emergencynoteButton = (CardView) findViewById(R.id.emergencyButton);
 
         editProfile.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -76,6 +80,30 @@ public class DoctorActivity extends AppCompatActivity
             @Override
             public void onClick(View v){
                 openAppointments();
+            }
+
+        });
+
+        addpatientButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                openaddPatient();
+            }
+
+        });
+
+        mypatientsButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                openmyPatients();
+            }
+
+        });
+
+        emergencynoteButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                openemergencyNotes();
             }
 
         });
@@ -205,6 +233,21 @@ public class DoctorActivity extends AppCompatActivity
     public void openAppointments(){
         final Intent appIntent = new Intent(this, DoctorAppointmentsActivity.class);
         startActivity(appIntent);
+    }
+
+    public void openaddPatient(){
+        final Intent addpatientIntent = new Intent(this, DoctorAddPatientActivity.class);
+        startActivity(addpatientIntent);
+    }
+
+    public void openmyPatients(){
+        final Intent mypatientsIntent = new Intent(this, DoctorMyPatientsActivity.class);
+        startActivity(mypatientsIntent);
+    }
+
+    public void openemergencyNotes(){
+        final Intent emergencynoteIntent = new Intent(this, DoctorEmergencyNotesActivity.class);
+        startActivity(emergencynoteIntent);
     }
 
 

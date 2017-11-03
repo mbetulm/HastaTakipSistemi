@@ -27,7 +27,6 @@
             android:name=".DoctorActivity"
             android:label="@string/title_activity_doctor"
             android:theme="@style/AppTheme" />
-        <activity android:name=".PatientDiseaseActivity" />
         <activity
             android:name=".DoctorQrActivity"
             android:label="@string/title_activity_doctor_qr"
@@ -39,6 +38,58 @@
         <activity
             android:name=".DoctorSettingsActivity"
             android:label="@string/title_activity_doctor_settings"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".DoctorAddPatientActivity"
+            android:label="@string/title_activity_doctor_add_patient"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".DoctorMyPatientsActivity"
+            android:label="@string/title_activity_doctor_my_patients"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".DoctorEmergencyNotesActivity"
+            android:label="@string/title_activity_doctor_emergency_notes"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".PatientDiseaseActivity"
+            android:label="@string/title_activity_patient_disease"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".PatientPillActivity"
+            android:label="@string/title_activity_patient_pill"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".PatientAllergyActivity"
+            android:label="@string/title_activity_patient_allergy"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".PatientAppointmentActivity"
+            android:label="@string/title_activity_patient_appointment"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".PatientAssayActivity"
+            android:label="@string/title_activity_patient_assay"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".PatientEmergencyNoteActivity"
+            android:label="@string/title_activity_patient_emergency_note"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".PatientGraphicActivity"
+            android:label="@string/title_activity_patient_graphic"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".PatientQRActivity"
+            android:label="@string/title_activity_patient_qr"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".PatientEmergncyActivity"
+            android:label="@string/title_activity_patient_emergncy"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".PatientSettingActivity"
+            android:label="@string/title_activity_patient_setting"
             android:theme="@style/AppTheme"></activity>
     </application>
 

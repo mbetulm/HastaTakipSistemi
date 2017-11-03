@@ -262,6 +262,7 @@
                 </android.support.v7.widget.CardView>
 
                 <android.support.v7.widget.CardView
+                    android:id="@+id/pillButton"
                     android:layout_width="160dp"
                     android:layout_height="190dp"
                     android:layout_margin="10dp"
@@ -315,6 +316,7 @@
                 app:layout_scrollFlags="scroll|enterAlways">
 
                 <android.support.v7.widget.CardView
+                    android:id="@+id/allergyButton"
                     android:layout_width="160dp"
                     android:layout_height="190dp"
                     android:layout_margin="10dp"
@@ -355,6 +357,7 @@
                 </android.support.v7.widget.CardView>
 
                 <android.support.v7.widget.CardView
+                    android:id="@+id/p_appointmentButton"
                     android:layout_width="160dp"
                     android:layout_height="190dp"
                     android:layout_margin="10dp"
@@ -407,6 +410,7 @@
                 android:padding="10dp">
 
                 <android.support.v7.widget.CardView
+                    android:id="@+id/assayButton"
                     android:layout_width="160dp"
                     android:layout_height="190dp"
                     android:layout_margin="10dp"
@@ -446,6 +450,7 @@
                 </android.support.v7.widget.CardView>
 
                 <android.support.v7.widget.CardView
+                    android:id="@+id/p_emergencyNoteButton"
                     android:layout_width="160dp"
                     android:layout_height="190dp"
                     android:layout_margin="10dp"

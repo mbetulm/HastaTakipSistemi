@@ -8,12 +8,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
-public class PatientDiseaseActivity extends AppCompatActivity {
+public class PatientQRActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_patient_disease);
+        setContentView(R.layout.activity_patient_qr);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -30,5 +30,4 @@ public class PatientDiseaseActivity extends AppCompatActivity {
             finish();
         return super.onOptionsItemSelected(item);
     }
-
 }
