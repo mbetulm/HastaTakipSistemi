@@ -1,17 +1,47 @@
 package com.example.tuba.patienttrackingsystem;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.Toast;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class LoginActivity extends AppCompatActivity {
 
     EditText userName;
     EditText password;
+    ArrayList<HashMap<String ,String>> DoctorList;
+    public static String girenDoctor="";
+    public static String girenPatient="";
+    int basarılı_doctor=0;
+    int basarılı_hasta=0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,54 +51,159 @@ public class LoginActivity extends AppCompatActivity {
         userName = (EditText)findViewById(R.id.txt_username);
         password = (EditText)findViewById(R.id.txt_password);
         Button login = (Button)findViewById(R.id.btn_Login);
-
-        login.setOnClickListener(new View.OnClickListener() {
+        login.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View v) {
-                checkLogin();
+            public void onClick(View v ){
+                new GetDoctorList().execute("http://192.168.156.169/Service1.svc/DoctorLogin");
+                //new GetDoctorList().execute("http://192.168.0.10/Service1.svc/DoctorLogin");
             }
         });
+        DoctorList = new ArrayList<HashMap<String, String>>();
+
     }
-    private void checkLogin(){
-        if (userName.getText().toString().equals("doktor") && password.getText().toString().equals("1234")) {
 
-            final Intent i = new Intent(this, DoctorActivity.class);
-            Thread timer = new Thread(){
-                public void run(){
-                    try{
-                        sleep(0);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    finally{
-                        startActivity(i);
-                        finish();
 
+    class GetDoctorList extends AsyncTask<String, Void, String> {
+        String status = null;
+
+        protected void onPreExecute(){
+            super.onPreExecute();
+        }
+
+        protected String doInBackground(String... connUrl) {
+            HttpURLConnection conn;
+            BufferedReader reader;
+
+            try{
+                final URL url= new URL(connUrl[0]);
+                conn = (HttpURLConnection) url.openConnection();
+                conn.addRequestProperty("Content-Type", "application/json");
+                conn.setRequestMethod("GET");
+                int result = conn.getResponseCode();
+                if(result==200){
+                    InputStream in = new BufferedInputStream(conn.getInputStream());
+                    reader = new BufferedReader(new InputStreamReader(in));
+                    StringBuilder sb = new StringBuilder();
+                    String line = null;
+
+                    while((line = reader.readLine())!= null){
+                        status = line;
                     }
                 }
-            };
 
-            timer.start();
+            }catch (Exception ex){
+
+                System.out.print(ex);
+
+
+            }
+            return status;
         }
-        if(userName.getText().toString().equals("patient") && password.getText().toString().equals("1234")){
 
-            final Intent i = new Intent(this, PatientActivity.class);
-            Thread timer = new Thread(){
-                public void run(){
-                    try{
-                        sleep(0);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    finally{
-                        startActivity(i);
-                        finish();
 
+        public void onPostExecute(String result){
+            super.onPostExecute(result);
+
+            if (result!=null){
+                try{
+
+                    JSONArray jsonArray = new JSONArray(result);
+                    for (int i =0; i<jsonArray.length(); i++)
+                     {
+                         String pwd= jsonArray.getJSONObject(i).getString("DoctorPassword").trim();
+                         String name= jsonArray.getJSONObject(i).getString("DoctorName").trim();
+                         String doctorTc= jsonArray.getJSONObject(i).getString("DoctorTc").trim();
+
+                         if(userName.getText().toString().trim().equals(name) && password.getText().toString().trim().equals(pwd)){
+                             Intent intent = new Intent(LoginActivity.this, DoctorActivity.class);
+                             startActivity(intent);
+                             Toast.makeText(LoginActivity.this, "Doctor Successful login", Toast.LENGTH_LONG).show();
+                             girenDoctor=doctorTc;
+                             basarılı_doctor=1;
+                             break;
+                         }
+                     }
+                     if(basarılı_doctor==0){
+                         new GetPatientList().execute("http://192.168.156.169/Service1.svc/PatientLogin");
+
+                     }
+                }catch (Exception ex){
+                    ex.printStackTrace();
+                }
+            }
+        }
+
+
+    }
+
+    class GetPatientList extends AsyncTask<String,Void,String>{
+        String status = null;
+
+        protected void onPreExecute(){
+            super.onPreExecute();
+        }
+
+        protected String doInBackground(String... connUrl) {
+            HttpURLConnection conn;
+            BufferedReader reader;
+
+            try{
+                final URL url= new URL(connUrl[0]);
+                conn = (HttpURLConnection) url.openConnection();
+                conn.addRequestProperty("Content-Type", "application/json");
+                conn.setRequestMethod("GET");
+                int result = conn.getResponseCode();
+                if(result==200){
+                    InputStream in = new BufferedInputStream(conn.getInputStream());
+                    reader = new BufferedReader(new InputStreamReader(in));
+                    StringBuilder sb = new StringBuilder();
+                    String line = null;
+
+                    while((line = reader.readLine())!= null){
+                        status = line;
                     }
                 }
-            };
 
-            timer.start();
+            }catch (Exception ex){
+
+                System.out.print(ex);
+
+
+            }
+            return status;
         }
+
+
+        public void onPostExecute(String result){
+            super.onPostExecute(result);
+            if (result!=null){
+                try{
+
+                    JSONArray jsonArray = new JSONArray(result);
+                    for (int i =0; i<jsonArray.length(); i++)
+                    {
+                        String pwd= jsonArray.getJSONObject(i).getString("Patient_Password").trim();
+                        String name= jsonArray.getJSONObject(i).getString("Patient_Name").trim();
+                        String patientTc= jsonArray.getJSONObject(i).getString("Patient_Tc").trim();
+
+                        if(userName.getText().toString().trim().equals(name) && password.getText().toString().trim().equals(pwd)){
+                            Intent intent = new Intent(LoginActivity.this, PatientActivity.class);
+                            startActivity(intent);
+                            Toast.makeText(LoginActivity.this, "Patient Successful login", Toast.LENGTH_LONG).show();
+                            girenPatient=patientTc;
+                            basarılı_hasta=1;
+                            break;
+                        }
+                    }
+                    if(basarılı_hasta==0 && basarılı_doctor==0){
+                        Toast.makeText(LoginActivity.this, "Unsuccesfull login", Toast.LENGTH_LONG).show();
+
+                    }
+                }catch (Exception ex){
+                    ex.printStackTrace();
+                }
+            }
+        }
+
     }
 }

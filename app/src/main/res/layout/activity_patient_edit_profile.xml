@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.tuba.patienttrackingsystem.PatientEditProfileActivity">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_scrollFlags="scroll|enterAlways">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:scaleType="centerCrop"
+                    android:src="#03A9F4" />
+
+                <android.support.v7.widget.Toolbar
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentStart="true"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="18dp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+
+                        android:id="@+id/imageToUpload"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:src="@drawable/profil"
+                        app:civ_border_color="@android:color/white"
+                        app:civ_border_width="4dp"
+
+
+                        />
+
+
+                    <TextView
+                        android:id="@+id/txt_dName2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:textColor="@android:color/white"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txt_dMail2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_place_black_24dp"
+                            android:tint="@android:color/white" />
+
+                        <TextView
+                            android:id="@+id/txt_dAddress2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="8dp"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#EEEEEE"
+                android:orientation="vertical"
+                android:padding="16dp"
+                app:layout_scrollFlags="scroll|enterAlways">
+
+
+                <EditText
+                    android:id="@+id/nameTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/background_signup"
+                    android:drawableLeft="@drawable/ic_person_white_24dp"
+                    android:drawablePadding="12dp"
+                    android:ems="10"
+                    android:hint="Name"
+                    android:maxLines="1"
+                    android:padding="8dp"
+                    android:textColorHint="#fff" />
+
+                <EditText
+                    android:id="@+id/passwordTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/background_signup"
+                    android:drawableLeft="@drawable/ic_lock_white_24dp"
+                    android:drawablePadding="12dp"
+                    android:ems="10"
+                    android:hint="Password"
+                    android:maxLines="1"
+                    android:padding="8dp"
+                    android:textColorHint="#fff" />
+
+                <EditText
+                    android:id="@+id/teleponeTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/background_signup"
+                    android:drawableLeft="@drawable/ic_call_black_24dp"
+                    android:drawablePadding="12dp"
+                    android:ems="10"
+                    android:hint="Phone Number"
+                    android:maxLines="1"
+                    android:padding="8dp"
+                    android:textColorHint="#fff" />
+
+                <EditText
+                    android:id="@+id/emailTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/background_signup"
+                    android:drawableLeft="@drawable/ic_mail_outline_black_24dp"
+                    android:drawablePadding="12dp"
+                    android:ems="10"
+                    android:hint="Email"
+                    android:maxLines="1"
+                    android:padding="8dp"
+                    android:textColorHint="#fff" />
+
+                <EditText
+                    android:id="@+id/addressTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/background_signup"
+                    android:drawableLeft="@drawable/ic_add_location_black_24dp"
+                    android:drawablePadding="12dp"
+                    android:ems="10"
+                    android:hint="Address"
+                    android:maxLines="3"
+                    android:padding="8dp"
+                    android:textColorHint="#fff" />
+
+                <EditText
+                    android:id="@+id/heightTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/background_signup"
+                    android:drawableLeft="@drawable/ic_add_location_black_24dp"
+                    android:drawablePadding="12dp"
+                    android:ems="10"
+                    android:hint="Height"
+                    android:inputType="numberDecimal"
+                    android:maxLines="3"
+                    android:padding="8dp"
+                    android:textColorHint="#fff" />
+
+                <EditText
+                    android:id="@+id/weightTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/background_signup"
+                    android:drawableLeft="@drawable/ic_add_location_black_24dp"
+                    android:drawablePadding="12dp"
+                    android:ems="10"
+                    android:hint="Weight"
+                    android:inputType="numberDecimal"
+                    android:maxLines="3"
+                    android:padding="8dp"
+                    android:textColorHint="#fff" />
+
+                <Button
+                    android:id="@+id/btn_Dupdate"
+                    style="@style/Base.TextAppearance.AppCompat.Body1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/background_signup"
+                    android:clickable="true"
+                    android:padding="16dp"
+                    android:text="UPDATE "
+                    android:textAllCaps="false"
+                    android:textColor="#fff"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+
+        </android.support.design.widget.AppBarLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+</android.support.design.widget.CoordinatorLayout>

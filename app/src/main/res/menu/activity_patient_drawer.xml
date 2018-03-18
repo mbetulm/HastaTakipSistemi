@@ -18,6 +18,10 @@
             android:id="@+id/nav_emergency"
             android:icon="@drawable/ic_phone_in_talk_black_24dp"
             android:title="Emergency" />
+        <item
+            android:id="@+id/nav_location"
+            android:icon="@drawable/ic_location_on_black_24dp"
+            android:title="Send Location" />
     </group>
 
     <item android:title="Communicate">

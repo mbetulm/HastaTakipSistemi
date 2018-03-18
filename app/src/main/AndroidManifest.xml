@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.tuba.patienttrackingsystem">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,6 +15,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,10 +36,6 @@
         <activity
             android:name=".DoctorActivity"
             android:label="@string/title_activity_doctor"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name=".DoctorQrActivity"
-            android:label="@string/title_activity_doctor_qr"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".DoctorAppointmentsActivity"
@@ -84,13 +90,19 @@
             android:label="@string/title_activity_patient_qr"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".PatientEmergncyActivity"
-            android:label="@string/title_activity_patient_emergncy"
-            android:theme="@style/AppTheme" />
-        <activity
             android:name=".PatientSettingActivity"
             android:label="@string/title_activity_patient_setting"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".DoctorEditProfileActivity" />
+        <activity
+            android:name=".PatientLocationActivity"
+            android:label="@string/title_activity_patient_location" />
+        <activity android:name=".PatientEditProfileActivity" />
+        <activity
+            android:name=".PatientGetAppointmentActivity"
+            android:label="@string/title_activity_patient_get_appointment"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".DoctorTrackActivity"></activity>
     </application>
 
 </manifest>

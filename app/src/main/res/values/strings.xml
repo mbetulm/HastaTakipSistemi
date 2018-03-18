@@ -27,4 +27,66 @@
     <string name="title_activity_patient_qr">PatientQRActivity</string>
     <string name="title_activity_patient_emergncy">PatientEmergncyActivity</string>
     <string name="title_activity_patient_setting">PatientSettingActivity</string>
+    <string name="title_activity_patient_send_location">Map</string>
+    <string name="title_activity_patient_location">Map</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_print">Print</string>
+    <string name="action_info">Info</string>
+    <string name="action_add">Add</string>
+    <string name="action_export">Export</string>
+    <string name="action_confirm">Confirm</string>
+    <string name="imageViewTrend">Image showing the current trend</string>
+    <string name="oops">Oops..</string>
+    <string name="dataTypeSystole">Systole</string>
+    <string name="dataTypeDiastole">Diastole</string>
+    <string name="dataTypeHeartRate">Heart Rate</string>
+    <string name="dataTypeWeight">Weight</string>
+    <string name="activity_add_data_item">Add Measurement</string>
+    <string name="activity_settings">Settings</string>
+    <string name="activity_info">Information</string>
+    <string name="activity_export">Export</string>
+    <string name="activity_progression">Overview</string>
+    <string name="activity_data_item_choser">Chose Measurement</string>
+    <string name="dataTypeBloodPressure">Blood Pressure</string>
+    <string name="date_and_time">Time and Date: </string>
+    <string name="dot">.</string>
+    <string name="bpSeperator">/</string>
+    <string name="unit_bloodPressure">mmHg</string>
+    <string name="unit_heartrate">bpm</string>
+    <string name="unit_weight">kg</string>
+    <string name="addValue">Add %s value</string>
+    <string name="name">Name:</string>
+    <string name="enterPersonalData">Your personal data:</string>
+    <string name="unit_height">cm</string>
+    <string name="size">Size:</string>
+    <string name="valuesToTrack">Parameters to track:</string>
+    <string name="birthday">Birthday:</string>
+    <string name="settingsText">Configure your\nBlood Pressure Diary</string>
+    <string name="action_edit">Edit</string>
+    <string name="imageSaveResult">Successfully exported image to %s</string>
+    <string name="activity_edit_data_items">Edit Data Items</string>
+    <string name="dialog_delete_title">Delete Data Item</string>
+    <string name="dialog_delete_message">Are you sure you wish to delete the selected data item?</string>
+
+    <string-array name="Time">
+        <item>09.00-09.30</item>
+        <item>09.30-10.00</item>
+        <item>10.00-10.30</item>
+        <item>10.30-11.00</item>
+        <item>11.00-11.30</item>
+        <item>11.30-12.00</item>
+        <item>13.00-13.30</item>
+        <item>13.30-14.00</item>
+        <item>14.00-14.30</item>
+        <item>14.30-15.00</item>
+        <item>15.00-15.30</item>
+        <item>15.30-16.00</item>
+        <item>16.00-16.30</item>
+        <item>16.30-17.00</item>
+    </string-array>
+    <string name="title_activity_patient_appointment_detail">PatientAppointmentDetailActivity
+    </string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_patient_get_appointment">PatientGetAppointmentActivity</string>
 </resources>
