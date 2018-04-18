@@ -24,6 +24,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +41,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.MessageDigest;
+import java.util.HashMap;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
@@ -67,6 +69,9 @@ public class DoctorActivity extends AppCompatActivity
 
     final Activity activity=this;
     String AES = "AES";
+    static String result2;
+    String password="123";
+    static boolean success = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +79,7 @@ public class DoctorActivity extends AppCompatActivity
         setContentView(R.layout.activity_doctor);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -111,16 +117,25 @@ public class DoctorActivity extends AppCompatActivity
                 integrator.setBarcodeImageEnabled(false);
                 integrator.initiateScan();
 
+
             }
         });
 
         btnMessages.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Uri uri= Uri.parse("sms:(0507 264-8495)");
-                Intent intent= new Intent(Intent.ACTION_VIEW, uri);
+                Toast.makeText(DoctorActivity.this, "Please select the person you want to send a message", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(DoctorActivity.this, DoctorMyPatientsActivity.class);
                 startActivity(intent);
 
+            }
+        });
+
+        btnNotification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent resultTrack = new Intent(DoctorActivity.this, DoctorShowTrackActivity.class);
+                startActivity(resultTrack);
             }
         });
 
@@ -165,6 +180,9 @@ public class DoctorActivity extends AppCompatActivity
         });
 
         new DoctorActivity.GetDoctorDetails().execute("http://192.168.156.169/Service1.svc/DoctorDetails");
+        //new DoctorActivity.GetDoctorDetails().execute("http://192.168.0.10/Service1.svc/DoctorDetails");
+
+
 
     }
 
@@ -174,6 +192,27 @@ public class DoctorActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         }
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Do you want to exit?");
+
+        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                Intent loginIntent = new Intent(DoctorActivity.this, LoginActivity.class);
+                finishAffinity();
+                startActivity(loginIntent);
+            }
+        });
+
+        builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
     @Override
@@ -350,8 +389,7 @@ public class DoctorActivity extends AppCompatActivity
         }
     }
 
-    String result2;
-    String password="123";
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
@@ -364,7 +402,8 @@ public class DoctorActivity extends AppCompatActivity
             if (result2 == null) {
                 Toast.makeText(this, "You cancelled the scanning", Toast.LENGTH_LONG).show();
             } else {
-                Toast.makeText(this, result2, Toast.LENGTH_LONG).show();
+                //Toast.makeText(this, result2, Toast.LENGTH_LONG).show();
+                new GetMyPatients().execute("http://192.168.156.169/Service1.svc/MyPatients");
 
             }
         } else {
@@ -390,6 +429,80 @@ public class DoctorActivity extends AppCompatActivity
         byte[] key = digest.digest();
         SecretKeySpec secretKeySpec = new SecretKeySpec(key, "AES");
         return secretKeySpec;
+    }
+
+
+    class GetMyPatients extends AsyncTask<String, Void, String> {
+        String status=null;
+
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+        protected String doInBackground(String... connUrl) {
+            HttpURLConnection conn;
+            BufferedReader reader;
+            try {
+                final URL url = new URL(connUrl[0]);
+                conn = (HttpURLConnection) url.openConnection();
+                conn.addRequestProperty("Content-Type", "application/json");
+                conn.setRequestMethod("GET");
+                int result = conn.getResponseCode();
+                if (result == 200) {
+                    InputStream in = new BufferedInputStream(conn.getInputStream());
+                    reader = new BufferedReader(new InputStreamReader(in));
+                    StringBuilder sb = new StringBuilder();
+                    String line = null;
+
+                    while ((line = reader.readLine()) != null) {
+                        status = line;
+                    }
+                }
+
+            } catch (Exception ex) {
+
+                System.out.print(ex);
+
+
+            }
+            return status;
+        }
+
+
+
+        public void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            if (result != null) {
+                try {
+                    JSONArray jsonArray = new JSONArray(result);
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        String pName = jsonArray.getJSONObject(i).getString("Patient_Name");
+                        String dTc = jsonArray.getJSONObject(i).getString("DoctorTc");
+                        String ptTc = jsonArray.getJSONObject(i).getString("Patient_Tc");
+
+                        if (LoginActivity.girenDoctor.equals(dTc)) {
+                            if (ptTc.equals(result2)) {
+                                Intent intent = new Intent(DoctorActivity.this, DoctorPatientAssayResultActivity.class);
+                                startActivity(intent);
+                                success=false;
+                                break;
+                            }
+                            /*else if(!ptTc.equals(result2) &&  success == false){
+                                 Toast.makeText(DoctorActivity.this, "Patient could not found in your patients.", Toast.LENGTH_LONG).show();
+                            }*/
+                        }
+                    }
+                    if( success == true){
+                        Toast.makeText(DoctorActivity.this, "Patient could not found in your patients.", Toast.LENGTH_LONG).show();
+                    }
+
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
     }
 }
 

@@ -60,9 +60,9 @@
     <string name="enterPersonalData">Your personal data:</string>
     <string name="unit_height">cm</string>
     <string name="size">Size:</string>
-    <string name="valuesToTrack">Parameters to track:</string>
+    <string name="valuesToTrack">Parameters to Track:</string>
     <string name="birthday">Birthday:</string>
-    <string name="settingsText">Configure your\nBlood Pressure Diary</string>
+    <string name="settingsText">Configure Your\nPatient Track Diary</string>
     <string name="action_edit">Edit</string>
     <string name="imageSaveResult">Successfully exported image to %s</string>
     <string name="activity_edit_data_items">Edit Data Items</string>

@@ -16,6 +16,7 @@ public class DoctorSettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_doctor_settings);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         if (getSupportActionBar()!=null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);

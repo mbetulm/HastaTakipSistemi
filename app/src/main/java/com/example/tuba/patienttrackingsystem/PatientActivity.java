@@ -5,20 +5,14 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.util.Base64;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -28,10 +22,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.zxing.BarcodeFormat;
@@ -41,11 +33,15 @@ import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.MessageDigest;
@@ -68,6 +64,14 @@ public class PatientActivity extends AppCompatActivity
     String password="123";
     String text2Qr;
     String AES="AES";
+    String base_url="http://192.168.156.169/Service1.svc/PatientDisease";
+    //String base_url="http://192.168.0.10/Service1.svc/PatientDisease";
+
+    public  static boolean isBloodPressure=false;
+    public static boolean isBloodSugar=false;
+    public static boolean isHeartRate=false;
+    public static boolean isWeight=false;
+    public static boolean isAllergy=false;
 
 
     @Override
@@ -76,6 +80,7 @@ public class PatientActivity extends AppCompatActivity
         setContentView(R.layout.activity_patient);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -106,6 +111,14 @@ public class PatientActivity extends AppCompatActivity
                 Intent intent= new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
 
+            }
+        });
+
+        btnNotification.setOnClickListener(new View.OnClickListener() { // step counter
+            @Override
+            public void onClick(View view) {
+                Intent graphcIntent = new Intent(PatientActivity.this, PatientGraphicActivity.class);
+                startActivity(graphcIntent);
             }
         });
 
@@ -176,6 +189,9 @@ public class PatientActivity extends AppCompatActivity
         });
 
         new PatientActivity.GetPatientDetails().execute("http://192.168.156.169/Service1.svc/PatientDetails");
+        //new PatientActivity.GetPatientDetails().execute("http://192.168.0.10/Service1.svc/PatientDetails");
+
+        new PatientActivity.PatientDisease().execute(base_url+"/"+LoginActivity.girenPatient);
     }
 
 
@@ -186,6 +202,27 @@ public class PatientActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         }
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Do you want to exit?");
+
+        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                Intent loginIntent = new Intent(PatientActivity.this, LoginActivity.class);
+                finishAffinity();
+                startActivity(loginIntent);
+            }
+        });
+
+        builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
     @Override
@@ -214,12 +251,7 @@ public class PatientActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_graphic) {
-
-            Intent graphcIntent = new Intent(PatientActivity.this, PatientGraphicActivity.class);
-            startActivity(graphcIntent);
-
-        } else if (id == R.id.nav_profile) {
+        if (id == R.id.nav_profile) {
             Intent homeIntent = new Intent(PatientActivity.this, PatientActivity.class);
             startActivity(homeIntent);
 
@@ -293,7 +325,7 @@ public class PatientActivity extends AppCompatActivity
     }
 
     public void open_patient_allery() {
-        final Intent patientAllergyIntent = new Intent(this, PatientAllergyActivity.class);
+        final Intent patientAllergyIntent = new Intent(this, PatientSurveyActivity.class);
         startActivity(patientAllergyIntent);
 
     }
@@ -446,4 +478,100 @@ public class PatientActivity extends AppCompatActivity
         SecretKeySpec secretKeySpec = new SecretKeySpec(key, "AES");
         return secretKeySpec;
     }
+
+
+    class PatientDisease extends AsyncTask<String, Void, String> {
+        String status = null;
+        Activity context;
+
+
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+        protected String doInBackground(String... connUrl) {
+            HttpURLConnection conn;
+            BufferedReader reader;
+
+
+            try {
+                final URL url = new URL(connUrl[0]);
+                conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("POST");
+                conn.setDoInput(true);
+                conn.addRequestProperty("Content-Type", "application/json");
+
+
+                JSONObject j = new JSONObject();
+                j.put("patientTC",DoctorMyPatientsActivity.selected_TC);
+
+                OutputStream out = conn.getOutputStream();
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out,"UTF-8"));
+                writer.write(j.toString());
+                writer.flush();
+                writer.close();
+                out.close();
+                conn.connect();
+
+                int result = conn.getResponseCode();
+                if (result == 200) {
+                    InputStream in = new BufferedInputStream(conn.getInputStream());
+                    reader = new BufferedReader(new InputStreamReader(in));
+                    StringBuilder sb = new StringBuilder();
+                    String line = null;
+
+                    while ((line = reader.readLine()) != null) {
+                        status = line;
+                    }
+                }
+
+            } catch (Exception ex) {
+
+                System.out.print(ex);
+
+
+            }
+            return status;
+
+
+        }
+        public void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+
+            if (result != null) {
+                try {
+                    JSONArray jsonArray = new JSONArray(result);
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        String ptTc = jsonArray.getJSONObject(i).getString("Patient_Tc");
+                        String startTrack = jsonArray.getJSONObject(i).getString("Start_Track").trim();
+                        String endTrack = jsonArray.getJSONObject(i).getString("End_Track").trim();
+                        String diseaseId = jsonArray.getJSONObject(i).getString("Disease_ID").trim();
+
+                        if(diseaseId.contains("1")){
+                            isBloodPressure=true;
+                        }
+                        if(diseaseId.contains("2")){
+                            isBloodSugar=true;
+                        }
+                        if(diseaseId.contains("3")){
+                            isHeartRate=true;
+                        }
+                        if(diseaseId.contains("4")){
+                            isWeight=true;
+                        }
+                        if(diseaseId.contains("5")){
+                            isAllergy=true;
+                        }
+
+
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+    }
 }
+

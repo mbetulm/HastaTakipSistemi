@@ -3,6 +3,7 @@ package com.example.tuba.patienttrackingsystem;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,7 @@ import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
@@ -54,6 +56,9 @@ public class DoctorMyPatientsActivity extends AppCompatActivity {
     String base_url="http://192.168.156.169/Service1.svc/DeletePatient";
     public static String selectedItem="";
     public static String selected_TC;
+    public static String selected_phoneNumber;
+
+
 
     public static final String FIRST_COLUMN="Patient_Name";
     public static final String SECOND_COLUMN="Patient_Tc";
@@ -61,7 +66,7 @@ public class DoctorMyPatientsActivity extends AppCompatActivity {
     EditText editText;
     private static ArrayList<HashMap<String, String >> searchResults;
     FloatingActionMenu materialDesignFAM;
-    FloatingActionButton floatingActionButton1, floatingActionButton2, floatingActionButton3;
+    FloatingActionButton floatingActionButton1, floatingActionButton2, floatingActionButton3, floatingActionButton4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,10 +82,12 @@ public class DoctorMyPatientsActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
 
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+
         materialDesignFAM = (FloatingActionMenu) findViewById(R.id.material_design_android_floating_action_menu);
         floatingActionButton1 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item1);
         floatingActionButton2 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item2);
-        floatingActionButton3 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item3);
+        floatingActionButton4 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item4);
 
         floatingActionButton1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -92,16 +99,20 @@ public class DoctorMyPatientsActivity extends AppCompatActivity {
         });
         floatingActionButton2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //delete
+                //Delete
                 new DeleteRelation().execute(base_url+"/"+selected_TC);
                 PatientList.clear();
                 new GetMyPatients(DoctorMyPatientsActivity.this, list).execute("http://192.168.156.169/Service1.svc/MyPatients");
 
             }
         });
-        floatingActionButton3.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                //show
+
+        floatingActionButton4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Uri uri= Uri.parse("sms: " + selected_phoneNumber);  //"sms:(0507 264-8495)"
+                Intent intent= new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
             }
         });
 
@@ -165,8 +176,10 @@ public class DoctorMyPatientsActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 selectedItem = parent.getItemAtPosition(position).toString();
                 String[] parts = selectedItem.split(",");
-                String part1 = parts[1];
+                String part0 = parts[0];
+                String part1 = parts[2];
                 selected_TC = part1.substring(12,part1.length()-1);
+                selected_phoneNumber = part0.substring(20,part0.length());
 
             }
         });
@@ -233,14 +246,15 @@ public class DoctorMyPatientsActivity extends AppCompatActivity {
                         String pName = jsonArray.getJSONObject(i).getString("Patient_Name");
                         String dTc= jsonArray.getJSONObject(i).getString("DoctorTc");
                         String ptTc = jsonArray.getJSONObject(i).getString("Patient_Tc");
+                        String ptPhoneNumber = jsonArray.getJSONObject(i).getString("Patient_PhoneNumber");
 
                         HashMap<String,String> pList = new HashMap<String, String>();
 
                         if(LoginActivity.girenDoctor.equals(dTc)){
                             pList.put(FIRST_COLUMN,pName);
                             pList.put(SECOND_COLUMN,ptTc);
+                            pList.put("PatientPhoneNumber",ptPhoneNumber);
                             PatientList.add(pList);
-
                         }
                     }
                     adapter = new ListViewAdapter(DoctorMyPatientsActivity.this, PatientList);

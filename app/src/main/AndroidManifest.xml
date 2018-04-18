@@ -7,11 +7,11 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -28,81 +28,79 @@
         </activity>
         <activity
             android:name=".LoginActivity"
-            android:exported="true" />
+            android:exported="true"
+            />
         <activity
             android:name=".PatientActivity"
-            android:label="@string/title_activity_patient"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            />
         <activity
             android:name=".DoctorActivity"
-            android:label="@string/title_activity_doctor"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            />
         <activity
             android:name=".DoctorAppointmentsActivity"
-            android:label="@string/title_activity_doctor_appointments"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".DoctorSettingsActivity"
-            android:label="@string/title_activity_doctor_settings"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".DoctorAddPatientActivity"
-            android:label="@string/title_activity_doctor_add_patient"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".DoctorMyPatientsActivity"
-            android:label="@string/title_activity_doctor_my_patients"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".DoctorEmergencyNotesActivity"
-            android:label="@string/title_activity_doctor_emergency_notes"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".PatientDiseaseActivity"
-            android:label="@string/title_activity_patient_disease"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".PatientPillActivity"
-            android:label="@string/title_activity_patient_pill"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".PatientAllergyActivity"
-            android:label="@string/title_activity_patient_allergy"
+            android:name=".PatientSurveyActivity"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".PatientAppointmentActivity"
-            android:label="@string/title_activity_patient_appointment"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".PatientAssayActivity"
-            android:label="@string/title_activity_patient_assay"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".PatientEmergencyNoteActivity"
-            android:label="@string/title_activity_patient_emergency_note"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".PatientGraphicActivity"
-            android:label="@string/title_activity_patient_graphic"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".PatientQRActivity"
-            android:label="@string/title_activity_patient_qr"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".PatientSettingActivity"
-            android:label="@string/title_activity_patient_setting"
             android:theme="@style/AppTheme" />
         <activity android:name=".DoctorEditProfileActivity" />
         <activity
-            android:name=".PatientLocationActivity"
-            android:label="@string/title_activity_patient_location" />
+            android:name=".PatientLocationActivity" />
         <activity android:name=".PatientEditProfileActivity" />
         <activity
             android:name=".PatientGetAppointmentActivity"
-            android:label="@string/title_activity_patient_get_appointment"
             android:theme="@style/AppTheme" />
-        <activity android:name=".DoctorTrackActivity"></activity>
+        <activity android:name=".DoctorTrackActivity" />
+        <activity android:name=".PatientBloodPressureTrackActivity" />
+        <activity android:name=".PatientBloodSugarTrackActivity" />
+        <activity android:name=".PatientHeartRateTrackActivity" />
+        <activity android:name=".PatientWeightTrackActivity" />
+        <activity android:name=".PatientAllergyTrackActivity" />
+        <activity android:name=".DoctorShowTrackActivity" />
+        <activity android:name=".DoctorGetPatientFullTrackReport" />
+        <activity android:name=".DoctorGetPatientTrackReport" />
+        <activity android:name=".DoctorPatientAssayResultActivity" />
+        <activity android:name=".ShowPDFActivity" />
+        <activity android:name=".PatientShowPDFActivity" />
+        <activity android:name=".DoctorShowGraphActivity" />
+        <activity android:name=".DoctorShowWeightGraphActivity"></activity>
     </application>
 
 </manifest>

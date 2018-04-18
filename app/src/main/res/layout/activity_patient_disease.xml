@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,7 +9,8 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:id="@+id/appBarLayout2">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -20,6 +21,65 @@
 
     </android.support.design.widget.AppBarLayout>
 
+    <!--LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_below="@+id/appBarLayout2"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="32dp">
+
+        <Button
+            android:id="@+id/btn_bloodPressure"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="BLOOD PRESSURE"
+
+            android:visibility="invisible"/>
+
+        <Button
+            android:id="@+id/btn_bloodSugar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="BLOOD SUGAR"
+
+            android:visibility="invisible"/>
+
+        <Button
+            android:id="@+id/btn_heartRate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="HEART RATE"
+
+            android:visibility="invisible"/>
+
+        <Button
+            android:id="@+id/btn_weight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="WEIGHT"
+
+            android:visibility="invisible"/>
+
+        <Button
+            android:id="@+id/btn_allergy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ALLERGY"
+
+            android:visibility="invisible"/>
+
+    </LinearLayout-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/buttonsLayout"
+        android:orientation="vertical"
+        android:layout_marginTop="85dp">
+
+    </LinearLayout>
 
 
-</android.support.design.widget.CoordinatorLayout>
+
+</RelativeLayout>

@@ -56,6 +56,7 @@ public class PatientGetAppointmentActivity extends AppCompatActivity implements 
         setContentView(R.layout.activity_patient_get_appointment);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         if (getSupportActionBar()!=null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -189,7 +190,11 @@ public class PatientGetAppointmentActivity extends AppCompatActivity implements 
                     new CustomTimePickerDialog.OnTimeSetListener(){
                         @Override
                         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                            txtTime.setText(hourOfDay + ":" + minute);
+                            if (minute == 0){
+                                txtTime.setText(hourOfDay + ":" + minute +"0");
+                            }else{
+                                txtTime.setText(hourOfDay + ":" + minute);
+                            }
                             selectedAppTime=txtTime.getText().toString();
                         }
 

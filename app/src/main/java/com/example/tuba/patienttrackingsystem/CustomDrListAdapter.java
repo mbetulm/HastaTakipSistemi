@@ -21,6 +21,7 @@ public class CustomDrListAdapter extends BaseAdapter {
         this.mcontext = mcontext;
         this.appointmentList = appointmentList;
     }
+
     @Override
     public int getCount() {
         return appointmentList.size();
@@ -43,9 +44,9 @@ public class CustomDrListAdapter extends BaseAdapter {
         TextView patientName = (TextView)v.findViewById(R.id.txt_app_patientName);
         TextView appDateTime = (TextView)v.findViewById(R.id.txt_app_datetime);
 
-        patientTc.setText(appointmentList.get(i).patientTc);
-        patientName.setText(appointmentList.get(i).patientName);
-        appDateTime.setText(appointmentList.get(i).appointmentDate + "," + appointmentList.get(i).appointmentTime);
+        patientTc.setText("   "+appointmentList.get(i).patientTc);
+        patientName.setText("   "+appointmentList.get(i).patientName);
+        appDateTime.setText("   "+appointmentList.get(i).appointmentDate + "," + appointmentList.get(i).appointmentTime);
 
         return v;
     }

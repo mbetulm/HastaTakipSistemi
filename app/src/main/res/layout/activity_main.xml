@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="#607d8b"
     tools:context="com.example.tuba.patienttrackingsystem.MainActivity">
 
     <LinearLayout
@@ -18,7 +18,7 @@
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_gravity="center"
-            android:src="@drawable/hospital" />
+            android:src="@drawable/main_img" />
 
         <TextView
             android:id="@+id/tv"

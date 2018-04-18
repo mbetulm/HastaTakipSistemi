@@ -16,10 +16,6 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
-
-
-
-
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -70,18 +66,18 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/txt_patient_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:id="@+id/txt_patient_name"
                         android:textColor="@android:color/white"
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/txt_patient_email"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/txt_patient_email"
                         android:textColor="@android:color/white"
                         android:textStyle="bold" />
 
@@ -97,11 +93,11 @@
                             android:tint="@android:color/white" />
 
                         <TextView
+                            android:id="@+id/txt_patient_address"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginLeft="8dp"
-                            android:id="@+id/txt_patient_address"
                             android:textColor="@android:color/white"
                             android:textStyle="bold" />
 
@@ -125,56 +121,57 @@
                     android:columnCount="3"
                     android:padding="16dp"
                     android:rowCount="2">
+
                     <at.markushi.ui.CircleButton
                         android:id="@+id/btn_Message"
                         android:layout_width="110dp"
                         android:layout_height="110dp"
                         android:layout_centerInParent="true"
+                        android:src="@drawable/message"
                         app:cb_color="#ffc107"
-                        app:cb_pressedRingWidth="15dp"
-                        android:src="@drawable/message"/>
+                        app:cb_pressedRingWidth="15dp" />
+
                     <at.markushi.ui.CircleButton
                         android:id="@+id/btn_Notification"
                         android:layout_width="110dp"
                         android:layout_height="110dp"
                         android:layout_centerInParent="true"
+                        android:src="@drawable/step"
                         app:cb_color="#6cecce"
-                        app:cb_pressedRingWidth="15dp"
-                        android:src="@drawable/notification"/>
+                        app:cb_pressedRingWidth="15dp" />
+
                     <at.markushi.ui.CircleButton
                         android:id="@+id/btn_QR"
                         android:layout_width="110dp"
                         android:layout_height="110dp"
                         android:layout_centerInParent="true"
+                        android:src="@drawable/qr_code_mini"
                         app:cb_color="#6ce"
-                        app:cb_pressedRingWidth="15dp"
-                        android:src="@drawable/qr_code_mini"/>
-
-
+                        app:cb_pressedRingWidth="15dp" />
 
 
                     <TextView
+                        android:layout_gravity="center"
                         android:layout_marginLeft="8dp"
                         android:layout_marginRight="8dp"
-                        android:layout_gravity="center"
                         android:text="Messagges"
                         android:textColor="@android:color/black"
                         android:textSize="15sp"
                         android:textStyle="bold" />
 
                     <TextView
+                        android:layout_gravity="center"
                         android:layout_marginLeft="8dp"
                         android:layout_marginRight="8dp"
-                        android:layout_gravity="center"
-                        android:text="Notification"
+                        android:text="Step Counter"
                         android:textColor="@android:color/black"
                         android:textSize="15sp"
                         android:textStyle="bold" />
 
                     <TextView
+                        android:layout_gravity="center"
                         android:layout_marginLeft="8dp"
                         android:layout_marginRight="8dp"
-                        android:layout_gravity="center"
                         android:text="My QR Code"
                         android:textColor="@android:color/black"
                         android:textSize="15sp"
@@ -189,8 +186,7 @@
                 android:background="#EEEEEE"
                 android:orientation="vertical"
                 android:padding="16dp"
-                app:layout_scrollFlags="scroll|enterAlways">
-            </LinearLayout>
+                app:layout_scrollFlags="scroll|enterAlways"></LinearLayout>
 
 
             <LinearLayout
@@ -319,13 +315,13 @@
                             android:layout_height="100dp"
                             android:background="@drawable/circleyellowbackground"
                             android:padding="10dp"
-                            android:src="@drawable/allergy" />
+                            android:src="@drawable/survey" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:text="My Alergies"
+                            android:text="Survey"
                             android:textStyle="bold" />
 
                         <View
@@ -480,8 +476,6 @@
         </android.support.design.widget.AppBarLayout>
 
     </android.support.v4.widget.NestedScrollView>
-
-
 
 
 </android.support.design.widget.CoordinatorLayout>
